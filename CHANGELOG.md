@@ -14,3 +14,4 @@ All notable changes to this project are documented here.
 - Add an animated GIF preview and default the documentation to English.
 - Add a Chinese language switch to the GitHub Pages frontend.
 - Add `README.zh-CN.md`; English is now the primary README.
+- Fix section visibility on restored scroll positions and cache-bust frontend assets.
