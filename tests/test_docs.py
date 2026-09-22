@@ -46,10 +46,17 @@ class DocumentationTests(unittest.TestCase):
 
     def test_readme_has_quick_start_prompt_and_pages_link(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("## 快速开始（复制 Prompt 给 Codex）", readme)
+        self.assertIn("## 快速开始", readme)
         self.assertIn("https://wellkilo.github.io/codex-jev-preflight/", readme)
         self.assertIn("codex-jev-configure", readme)
         self.assertIn("codex-jev-install", readme)
+
+    def test_readme_has_badges_and_visual_structure(self):
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn('<div align="center">', readme)
+        self.assertIn("actions/workflows/ci.yml/badge.svg", readme)
+        self.assertIn("img.shields.io/github/v/release", readme)
+        self.assertIn("```mermaid", readme)
 
     def test_pages_workflow_deploys_docs(self):
         workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")
