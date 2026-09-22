@@ -445,8 +445,7 @@ textarea:focus { border-color: rgba(83, 215, 180, 0.6); box-shadow: 0 0 0 4px rg
   transition: opacity 180ms ease, transform 180ms ease;
 }
 .toast.visible { opacity: 1; transform: translateY(0); }
-.reveal { opacity: 0; transform: translateY(18px); transition: opacity 520ms ease, transform 520ms ease; }
-.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal { opacity: 1; transform: none; }
 
 @media (max-width: 1040px) {
   .hero-grid, .quick-layout, .demo-shell { grid-template-columns: 1fr; }
@@ -510,5 +509,4 @@ textarea:focus { border-color: rgba(83, 215, 180, 0.6); box-shadow: 0 0 0 4px rg
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
-  .reveal { opacity: 1; transform: none; }
 }

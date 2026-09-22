@@ -51,6 +51,12 @@ class DocumentationTests(unittest.TestCase):
         self.assertIn("codex-jev-language", javascript)
         self.assertIn("zh-CN", javascript)
 
+    def test_frontend_content_is_visible_without_javascript_observation(self):
+        styles = (DOCS / "styles.css").read_text(encoding="utf-8")
+        reveal_rule = styles.split(".reveal {", 1)[1].split("}", 1)[0]
+        self.assertNotIn("opacity: 0", reveal_rule)
+        self.assertIn("opacity: 1", reveal_rule)
+
     def test_frontend_demo_has_no_network_calls(self):
         javascript = (DOCS / "app.js").read_text(encoding="utf-8")
         forbidden = ("fetch(", "XMLHttpRequest", "WebSocket", "EventSource")
