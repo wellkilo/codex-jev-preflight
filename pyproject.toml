@@ -1,0 +1,55 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "codex-jev-preflight"
+version = "0.1.0"
+description = "Fail-open Codex UserPromptSubmit hook that adds TypeSafe Jev pre-task routing metadata."
+readme = "README.md"
+requires-python = ">=3.9"
+license = { file = "LICENSE" }
+authors = [
+  { name = "He Dong", email = "wellkilo@foxmail.com" },
+]
+keywords = ["codex", "jev", "typesafe", "agent", "hooks", "routing"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Developers",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/wellkilo/codex-jev-preflight"
+Issues = "https://github.com/wellkilo/codex-jev-preflight/issues"
+Repository = "https://github.com/wellkilo/codex-jev-preflight"
+
+[project.scripts]
+codex-jev-configure = "configure_jev:main"
+codex-jev-install = "install_jev_global_hook:main"
+
+[tool.setuptools]
+packages = ["jev_agent"]
+py-modules = [
+  "configure_jev",
+  "install_jev_global_hook",
+  "jev_user_prompt_hook",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+exclude = [".venv", "build", "dist"]
+
+[tool.ruff.lint]
+select = ["E4", "E7", "E9", "F", "I"]
+ignore = ["E501"]
