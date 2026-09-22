@@ -24,8 +24,8 @@ class DocumentationTests(unittest.TestCase):
         self.assertTrue((DOCS / "app.js").is_file())
         self.assertTrue((DOCS / "assets" / "demo.gif").is_file())
         self.assertTrue((DOCS / "assets" / "demo-poster.png").is_file())
-        self.assertIn('href="styles.css"', html)
-        self.assertIn('src="app.js"', html)
+        self.assertIn('href="styles.css?v=', html)
+        self.assertIn('src="app.js?v=', html)
         self.assertIn('src="assets/demo.gif"', html)
 
         parser = IdCollector()
