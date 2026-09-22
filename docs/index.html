@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Codex Jev Preflight injects TypeSafe Jev task routing metadata before Codex starts working.">
+    <meta name="theme-color" content="#08111f">
+    <title>Codex Jev Preflight</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">跳到主要内容</a>
+
+    <header class="site-header">
+      <nav class="nav shell" aria-label="主导航">
+        <a class="brand" href="#top" aria-label="Codex Jev Preflight 首页">
+          <span class="brand-mark" aria-hidden="true">JP</span>
+          <span>
+            <strong>Codex Jev Preflight</strong>
+            <small>TypeSafe Jev for Codex hooks</small>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links">
+          <span class="sr-only">打开导航</span>
+          <span aria-hidden="true">☰</span>
+        </button>
+        <div class="nav-links" id="nav-links">
+          <a href="#quick-start">快速开始</a>
+          <a href="#demo">交互演示</a>
+          <a href="#how-it-works">工作原理</a>
+          <a href="#docs">文档</a>
+          <a class="nav-cta" href="https://github.com/wellkilo/codex-jev-preflight">GitHub</a>
+        </div>
+      </nav>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top">
+        <div class="hero-glow hero-glow-one"></div>
+        <div class="hero-glow hero-glow-two"></div>
+        <div class="shell hero-grid">
+          <div class="hero-copy reveal">
+            <div class="eyebrow">
+              <span class="pulse-dot" aria-hidden="true"></span>
+              Codex UserPromptSubmit Hook
+            </div>
+            <h1>让 Codex 在动手前，先做一次 Jev 预判。</h1>
+            <p class="hero-lead">
+              每个新任务自动获得任务类型、复杂度、风险等级和建议执行模式。
+              判定是建议性上下文，不会覆盖系统、开发者或用户的明确指令。
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#quick-start">立即快速开始</a>
+              <a class="button button-secondary" href="https://github.com/wellkilo/codex-jev-preflight">
+                查看 GitHub 仓库
+              </a>
+            </div>
+            <ul class="hero-points" aria-label="核心特性">
+              <li>Fail-open，绝不阻塞任务</li>
+              <li>零 Python 依赖</li>
+              <li>持久化额度熔断</li>
+            </ul>
+          </div>
+
+          <div class="hero-visual reveal" aria-label="Jev 预判结果示意">
+            <div class="terminal-card">
+              <div class="terminal-topbar">
+                <div class="terminal-dots" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <span>codex / new task</span>
+                <span class="terminal-state">HOOK ACTIVE</span>
+              </div>
+              <div class="terminal-body">
+                <div class="terminal-line muted">user prompt received</div>
+                <div class="terminal-line">
+                  <span class="terminal-prompt">›</span>
+                  Refactor authentication and migrate the database
+                </div>
+                <div class="route-line" aria-hidden="true">
+                  <span></span><i></i><span></span>
+                </div>
+                <div class="assessment-card">
+                  <div class="assessment-header">
+                    <span>JEV PRE-TASK ASSESSMENT</span>
+                    <span class="live-badge">ADVISORY</span>
+                  </div>
+                  <dl>
+                    <div><dt>task_type</dt><dd>code_change</dd></div>
+                    <div><dt>complexity</dt><dd>moderate</dd></div>
+                    <div><dt>risk</dt><dd class="risk-medium">medium</dd></div>
+                    <div><dt>execution_mode</dt><dd>inspect_then_act</dd></div>
+                  </dl>
+                </div>
+                <div class="terminal-line success">✓ context injected · Codex continues</div>
+              </div>
+            </div>
+            <div class="floating-chip floating-chip-a">4 routing dimensions</div>
+            <div class="floating-chip floating-chip-b">&lt; 25s timeout</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="proof-strip" aria-label="项目特性">
+        <div class="shell proof-grid">
+          <div>
+            <strong>7</strong>
+            <span>任务类型</span>
+          </div>
+          <div>
+            <strong>4</strong>
+            <span>复杂度等级</span>
+          </div>
+          <div>
+            <strong>3</strong>
+            <span>风险等级</span>
+          </div>
+          <div>
+            <strong>4</strong>
+            <span>执行模式</span>
+          </div>
+          <div>
+            <strong>0</strong>
+            <span>第三方依赖</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="quick-start">
+        <div class="section-heading reveal">
+          <span class="section-kicker">Quick start</span>
+          <h2>三步完成接入</h2>
+          <p>
+            可以直接把安装 Prompt 粘给 Codex，也可以使用下面的命令行步骤手动安装。
+          </p>
+        </div>
+
+        <div class="quick-start-layout">
+          <article class="step-card featured reveal">
+            <div class="step-number">01</div>
+            <div>
+              <span class="step-label">推荐方式</span>
+              <h3>把这个 Prompt 粘贴给 Codex</h3>
+              <p>
+                Codex 会读取仓库说明，安装项目，配置 API Key，并验证 Hook 是否可用。
+              </p>
+            </div>
+            <div class="code-block">
+              <div class="code-toolbar">
+                <span>Codex Prompt</span>
+                <button class="copy-button" type="button" data-copy-target="codex-prompt">
+                  复制 Prompt
+                </button>
+              </div>
+              <pre id="codex-prompt"><code>请安装并配置 Codex Jev Preflight。
+
+要求：
+1. 阅读 https://github.com/wellkilo/codex-jev-preflight 的 README。
+2. 从源码安装项目，并运行 codex-jev-configure 配置 TypeSafe Jev API Key。
+3. API Key 必须隐藏输入，不要要求我在聊天中粘贴。
+4. 运行 codex-jev-install 安装全局 UserPromptSubmit Hook。
+5. 验证 Hook 输出，并告诉我需要重启 Codex 还是新建任务。
+6. 不要覆盖 ~/.codex/hooks.json 或 ~/.codex/AGENTS.md 中的其他配置。</code></pre>
+            </div>
+          </article>
+
+          <div class="manual-steps">
+            <article class="step-card compact reveal">
+              <div class="step-number">02</div>
+              <div class="step-content">
+                <h3>安装命令行工具</h3>
+                <div class="code-block small">
+                  <div class="code-toolbar">
+                    <span>Shell</span>
+                    <button class="copy-button" type="button" data-copy-target="install-command">复制</button>
+                  </div>
+                  <pre id="install-command"><code>git clone https://github.com/wellkilo/codex-jev-preflight.git
+cd codex-jev-preflight
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+python -m pip install -e .</code></pre>
+                </div>
+              </div>
+            </article>
+
+            <article class="step-card compact reveal">
+              <div class="step-number">03</div>
+              <div class="step-content">
+                <h3>配置并安装 Hook</h3>
+                <div class="code-block small">
+                  <div class="code-toolbar">
+                    <span>Shell</span>
+                    <button class="copy-button" type="button" data-copy-target="configure-command">复制</button>
+                  </div>
+                  <pre id="configure-command"><code>codex-jev-configure
+codex-jev-install
+# 重启 Codex 或新建任务
+# 如需自动信任 Hook：codex-jev-install --trust</code></pre>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+
+        <div class="prompt-gallery reveal">
+          <div class="prompt-gallery-copy">
+            <span class="section-kicker">Ready-to-use prompts</span>
+            <h3>安装完成后，可以这样使用</h3>
+            <p>Jev 会自动预判，不需要在每条任务中手动要求调用。</p>
+          </div>
+          <div class="prompt-list">
+            <button class="prompt-chip" type="button" data-demo-prompt="检查这个仓库的认证模块，定位安全风险并给出最小修复方案。">安全审查</button>
+            <button class="prompt-chip" type="button" data-demo-prompt="阅读项目并实现导出 CSV 的功能，补充测试和 README。">功能开发</button>
+            <button class="prompt-chip" type="button" data-demo-prompt="对比三个开源方案，给出架构、成本和维护风险建议。">技术调研</button>
+            <button class="prompt-chip" type="button" data-demo-prompt="清理旧构建产物并重新发布，不要影响生产环境。">高风险操作</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="demo">
+        <div class="section-heading reveal">
+          <span class="section-kicker">Interactive preview</span>
+          <h2>看看 Jev 会给出什么预判</h2>
+          <p>
+            下面是一个前端模拟器，用于展示字段结构。正式安装后会由 Jev API 返回真实判定。
+          </p>
+        </div>
+
+        <div class="demo-shell reveal">
+          <div class="demo-input-panel">
+            <label for="demo-prompt">输入一个 Codex 任务</label>
+            <textarea id="demo-prompt" rows="7" spellcheck="false">重构认证模块并迁移数据库，需要保持现有 API 兼容。</textarea>
+            <div class="sample-row" aria-label="示例任务">
+              <button type="button" data-demo-prompt="修复 README 中的拼写错误。">简单任务</button>
+              <button type="button" data-demo-prompt="实现一个跨文件的功能，并补充单元测试和文档。">中等开发</button>
+              <button type="button" data-demo-prompt="删除生产数据库中的旧表并部署新版本。">高风险任务</button>
+            </div>
+            <button class="button button-primary button-block" id="run-demo" type="button">
+              生成预判结果
+            </button>
+            <p class="demo-note">仅做本地关键字模拟，不会发送网络请求。</p>
+          </div>
+
+          <div class="demo-output-panel" aria-live="polite">
+            <div class="demo-output-header">
+              <div>
+                <span class="output-label">JEV PRE-TASK ASSESSMENT</span>
+                <small>automatic, advisory routing metadata</small>
+              </div>
+              <span class="output-status" id="demo-status">LOCAL DEMO</span>
+            </div>
+            <dl class="assessment-output">
+              <div>
+                <dt>task_type</dt>
+                <dd id="result-task-type">code_change</dd>
+              </div>
+              <div>
+                <dt>complexity</dt>
+                <dd id="result-complexity">moderate</dd>
+              </div>
+              <div>
+                <dt>risk</dt>
+                <dd id="result-risk">medium</dd>
+              </div>
+              <div>
+                <dt>execution_mode</dt>
+                <dd id="result-mode">inspect_then_act</dd>
+              </div>
+            </dl>
+            <div class="routing-bar" aria-label="本地模拟置信度">
+              <div class="routing-bar-label">
+                <span>Demo confidence</span>
+                <strong id="result-confidence">72%</strong>
+              </div>
+              <div class="routing-track"><span id="confidence-fill"></span></div>
+            </div>
+            <p class="rationale" id="result-rationale">
+              检测到跨模块代码修改，建议先检查现有实现和兼容性约束。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section shell" id="how-it-works">
+        <div class="section-heading reveal">
+          <span class="section-kicker">How it works</span>
+          <h2>一次调用，四维判断</h2>
+          <p>Hook 在 Codex 开始工作前运行，并把结果作为附加上下文注入当前任务。</p>
+        </div>
+
+        <div class="flow-grid reveal">
+          <article class="flow-card">
+            <span class="flow-index">01</span>
+            <h3>UserPromptSubmit</h3>
+            <p>Codex 将当前用户提示传给 Hook。</p>
+          </article>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <article class="flow-card accent-card">
+            <span class="flow-index">02</span>
+            <h3>Jev asks</h3>
+            <p>一次请求评估类型、复杂度、风险和执行模式。</p>
+          </article>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <article class="flow-card">
+            <span class="flow-index">03</span>
+            <h3>Context injected</h3>
+            <p>有效枚举值被安全注入，未知值归一化为 unknown。</p>
+          </article>
+          <div class="flow-arrow" aria-hidden="true">→</div>
+          <article class="flow-card">
+            <span class="flow-index">04</span>
+            <h3>Codex continues</h3>
+            <p>原任务继续运行，Jev 不会替代 Codex。</p>
+          </article>
+        </div>
+
+        <div class="dimension-grid">
+          <article class="dimension-card reveal">
+            <span class="dimension-icon">T</span>
+            <h3>task_type</h3>
+            <p>answer · code_change · research · browser_automation · planning · conversation · other</p>
+          </article>
+          <article class="dimension-card reveal">
+            <span class="dimension-icon">C</span>
+            <h3>complexity</h3>
+            <p>trivial · simple · moderate · complex</p>
+          </article>
+          <article class="dimension-card reveal">
+            <span class="dimension-icon">R</span>
+            <h3>risk</h3>
+            <p>low · medium · high</p>
+          </article>
+          <article class="dimension-card reveal">
+            <span class="dimension-icon">M</span>
+            <h3>execution_mode</h3>
+            <p>direct_answer · inspect_then_act · plan_then_execute · ask_clarification</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section shell" id="docs">
+        <div class="section-heading reveal">
+          <span class="section-kicker">Documentation</span>
+          <h2>需要更深入的说明？</h2>
+        </div>
+        <div class="docs-grid">
+          <a class="doc-card reveal" href="https://github.com/wellkilo/codex-jev-preflight/blob/main/README.md">
+            <span>README</span>
+            <h3>安装、配置、验证与卸载</h3>
+            <p>完整的操作说明、环境变量和故障排查。</p>
+            <strong>阅读中文文档 →</strong>
+          </a>
+          <a class="doc-card reveal" href="https://github.com/wellkilo/codex-jev-preflight/blob/main/docs/architecture.md">
+            <span>Architecture</span>
+            <h3>架构与降级路径</h3>
+            <p>了解 Hook、Jev 客户端、额度熔断器和 fail-open 行为。</p>
+            <strong>查看架构 →</strong>
+          </a>
+          <a class="doc-card reveal" href="https://github.com/wellkilo/codex-jev-preflight/blob/main/SECURITY.md">
+            <span>Security</span>
+            <h3>数据边界与漏洞报告</h3>
+            <p>了解发送给 Jev 的数据范围和安全策略。</p>
+            <strong>查看安全说明 →</strong>
+          </a>
+        </div>
+      </section>
+
+      <section class="section shell">
+        <div class="cta-panel reveal">
+          <div>
+            <span class="section-kicker">Ready to preflight?</span>
+            <h2>让你的 Codex 任务拥有稳定的第一判断。</h2>
+          </div>
+          <div class="cta-actions">
+            <a class="button button-primary" href="#quick-start">复制快速开始 Prompt</a>
+            <a class="button button-secondary" href="https://github.com/wellkilo/codex-jev-preflight">查看源码</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="shell footer-grid">
+        <div>
+          <strong>Codex Jev Preflight</strong>
+          <p>MIT License · Not affiliated with OpenAI, Codex, TypeSafe, or Jev.</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://docs.typesafe.ai">TypeSafe Jev Docs</a>
+          <a href="https://github.com/wellkilo/codex-jev-preflight/issues">Issues</a>
+          <a href="https://github.com/wellkilo/codex-jev-preflight/blob/main/LICENSE">License</a>
+        </div>
+      </div>
+    </footer>
+
+    <div class="toast" id="copy-toast" role="status" aria-live="polite">已复制到剪贴板</div>
+    <script src="app.js"></script>
+  </body>
+</html>
