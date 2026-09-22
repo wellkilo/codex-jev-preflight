@@ -2,6 +2,9 @@
 
 This directory contains the zero-build GitHub Pages site for Codex Jev Preflight.
 
+The interface defaults to English and includes a built-in switch to Chinese. The
+language preference is stored locally in the browser.
+
 ## Preview locally
 
 From the repository root:

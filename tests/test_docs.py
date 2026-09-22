@@ -22,8 +22,11 @@ class DocumentationTests(unittest.TestCase):
         html = (DOCS / "index.html").read_text(encoding="utf-8")
         self.assertTrue((DOCS / "styles.css").is_file())
         self.assertTrue((DOCS / "app.js").is_file())
+        self.assertTrue((DOCS / "assets" / "demo.gif").is_file())
+        self.assertTrue((DOCS / "assets" / "demo-poster.png").is_file())
         self.assertIn('href="styles.css"', html)
         self.assertIn('src="app.js"', html)
+        self.assertIn('src="assets/demo.gif"', html)
 
         parser = IdCollector()
         parser.feed(html)
@@ -31,12 +34,22 @@ class DocumentationTests(unittest.TestCase):
             {
                 "demo-prompt",
                 "run-demo",
+                "language-toggle",
                 "result-task-type",
                 "result-complexity",
                 "result-risk",
                 "result-mode",
             }.issubset(parser.ids)
         )
+
+    def test_frontend_defaults_to_english_and_has_language_switch(self):
+        html = (DOCS / "index.html").read_text(encoding="utf-8")
+        javascript = (DOCS / "app.js").read_text(encoding="utf-8")
+        self.assertIn('<html lang="en" data-lang="en">', html)
+        self.assertIn("data-i18n", html)
+        self.assertIn("language-toggle", html)
+        self.assertIn("codex-jev-language", javascript)
+        self.assertIn("zh-CN", javascript)
 
     def test_frontend_demo_has_no_network_calls(self):
         javascript = (DOCS / "app.js").read_text(encoding="utf-8")
@@ -46,17 +59,25 @@ class DocumentationTests(unittest.TestCase):
 
     def test_readme_has_quick_start_prompt_and_pages_link(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        self.assertIn("## 快速开始", readme)
+        self.assertIn("## Quick start", readme)
         self.assertIn("https://wellkilo.github.io/codex-jev-preflight/", readme)
         self.assertIn("codex-jev-configure", readme)
         self.assertIn("codex-jev-install", readme)
+        self.assertIn("README.zh-CN.md", readme)
 
-    def test_readme_has_badges_and_visual_structure(self):
+    def test_readme_has_gif_badges_and_visual_structure(self):
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
         self.assertIn('<div align="center">', readme)
+        self.assertIn("docs/assets/demo.gif", readme)
         self.assertIn("actions/workflows/ci.yml/badge.svg", readme)
         self.assertIn("img.shields.io/github/v/release", readme)
         self.assertIn("```mermaid", readme)
+
+    def test_chinese_readme_links_back_to_english(self):
+        readme = (ROOT / "README.zh-CN.md").read_text(encoding="utf-8")
+        self.assertIn("README.md", readme)
+        self.assertIn("docs/assets/demo.gif", readme)
+        self.assertIn("## 快速开始", readme)
 
     def test_pages_workflow_deploys_docs(self):
         workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(encoding="utf-8")

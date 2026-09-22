@@ -11,3 +11,6 @@ All notable changes to this project are documented here.
 - Add offline unit tests and GitHub Actions CI.
 - Add a zero-build GitHub Pages documentation frontend and interactive routing demo.
 - Add copy-ready Codex installation prompts to the README quick start.
+- Add an animated GIF preview and default the documentation to English.
+- Add a Chinese language switch to the GitHub Pages frontend.
+- Add `README.zh-CN.md`; English is now the primary README.
